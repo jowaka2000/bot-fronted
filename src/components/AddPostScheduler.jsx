@@ -2,6 +2,8 @@ import React, { useEffect, useReducer } from "react";
 import FirstPageAddScheduler from "./FirstPageAddScheduler";
 import SecondPageAddScheduler from "./SecondPageAddScheduler";
 import ThirdPageAddScheduler from "./ThirdPageAddScheduler";
+import { useParams } from "react-router-dom";
+
 
 const reducer = (state, action) => {
   if (action.type === "ADD_MESSAGE_CONTENT") {
@@ -23,12 +25,6 @@ const reducer = (state, action) => {
     const url = action.payLoad;
 
     return { ...state, url: url };
-  }
-
-  if (action.type === "ADD_IMAGE") {
-    const newImages = [...state.images, action.payLoad];
-
-    return { ...state, images: newImages };
   }
 
   if (action.type === "ERROR_MESSAGE") {
@@ -55,10 +51,8 @@ const reducer = (state, action) => {
       imageScheduler: "none",
       schedule: "none",
       realFiles: [],
-      files: [],
-      images: [],
       isError: false,
-      publishPost:false,
+      publishPost: false,
     };
   }
 
@@ -96,18 +90,6 @@ const reducer = (state, action) => {
     return { ...state, schedule: action.payLoad };
   }
 
-  if (action.type === "POST_ON_FACEBOOK") {
-    return { ...state, postOnFacebook: action.payLoad };
-  }
-
-  if (action.type === "POST_ON_TELEGRAM") {
-    return { ...state, postOnTelegram: action.payLoad };
-  }
-
-  if (action.type === "POST_ON_TWITTER") {
-    return { ...state, postOnTwitter: action.payLoad };
-  }
-
   if (action.type === "PUBLISH_POST") {
     return { ...state, publishPost: action.payLoad };
   }
@@ -116,9 +98,9 @@ const reducer = (state, action) => {
   if (action.type === "REMOVE_IMAGE") {
     const imageToRemove = action.payLoad;
 
-    const images = state.images.filter((image) => image !== imageToRemove);
+    const images = state.realFiles.filter((image) => image !== imageToRemove);
 
-    return { ...state, images: images };
+    return { ...state, realFiles: images };
   }
 
   //remove message content
@@ -150,13 +132,16 @@ const defaultAddPostState = {
   isFirstPage: true,
   isSecondPage: false,
   isThirdPage: false,
-  files: [],
   realFiles: [],
   isSuccessMessage: false,
 };
 
-const AddPostScheduler = ({ setIsAddPost, id }) => {
+const AddPostScheduler = ({ setIsAddPost }) => {
+  const data = useParams();
+
   const [state, dispatch] = useReducer(reducer, defaultAddPostState);
+
+  const id = data.id;
 
   useEffect(() => {
     const intervals = setInterval(() => {
@@ -171,6 +156,11 @@ const AddPostScheduler = ({ setIsAddPost, id }) => {
 
     return () => clearInterval(intervals);
   });
+
+  const handleCancelAddSchedulerButton = () => {
+    // loadPosts(id);
+    setIsAddPost(false);
+  };
 
   return (
     <div className="relative w-full md:w-6/12 shadow bg-white px-5">
@@ -188,7 +178,7 @@ const AddPostScheduler = ({ setIsAddPost, id }) => {
 
       <article className="w-full flex justify-end">
         <button
-          onClick={() => setIsAddPost(false)}
+          onClick={handleCancelAddSchedulerButton}
           className="pt-3 hover:text-red-500 text-gray-800"
         >
           <svg
@@ -208,7 +198,9 @@ const AddPostScheduler = ({ setIsAddPost, id }) => {
         </button>
       </article>
 
-      <article className="w-full flex justify-center">Add Post</article>
+      <article className="w-full flex justify-center text-lg font-semibold text-gray-700">
+        ADD SCHEDULER
+      </article>
 
       {/* first page */}
       {state.isFirstPage && (

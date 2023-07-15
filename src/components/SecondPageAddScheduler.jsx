@@ -1,38 +1,33 @@
-import React,{useRef} from 'react'
+import React, { useRef } from "react";
 
 const SecondPageAddScheduler = ({ state, dispatch }) => {
-    const imagesRef = useRef();
+  const imagesRef = useRef();
 
   const handleImagesInputOnChange = (e) => {
     const files = e.target.files;
 
     const selectedImages = Array.from(files);
 
-    if(selectedImages.length>=10){
+    if (selectedImages.length >= 10) {
       dispatch({
         type: "ERROR_MESSAGE",
         payLoad: "You can only upload a maximum of 10 images at a time!",
       });
-    }else{
+    } else {
       selectedImages.map((file) => {
 
-        dispatch({type:'ADD_REAL_FILES',payLoad:file});
-
-        let url = URL.createObjectURL(file);
-  
         if (
           file.type === "image/jpeg" ||
           file.type === "image/jpg" ||
           file.type === "image/png"
         ) {
-          
-          if(state.images.length>=10){
+          if (state.realFiles.length >= 10) {
             dispatch({
               type: "ERROR_MESSAGE",
               payLoad: "You have reached a maximum of 10 images to upload!",
             });
-          }else{
-            dispatch({ type: "ADD_IMAGE", payLoad: url });
+          } else {
+            dispatch({ type: "ADD_REAL_FILES", payLoad: file });
           }
         } else {
           dispatch({
@@ -40,11 +35,10 @@ const SecondPageAddScheduler = ({ state, dispatch }) => {
             payLoad: "Please include valid image (jpeg,jpg,png)",
           });
         }
-  
-        return url;
+
+        return file;
       });
     }
-  
   };
 
   const handleOnSubmitSecondPage = (e) => {
@@ -52,7 +46,7 @@ const SecondPageAddScheduler = ({ state, dispatch }) => {
     if (
       state.messageContent.length === 0 &&
       state.url === "" &&
-      state.images.length === 0
+      state.realFiles.length === 0
     ) {
       dispatch({
         type: "ERROR_MESSAGE",
@@ -109,9 +103,12 @@ const SecondPageAddScheduler = ({ state, dispatch }) => {
           </label>
         </div>
 
-        {state.images.length > 0 && (
+        {state.realFiles.length > 0 && (
           <div className="grid grid-cols-2 gap-1">
-            {state.images.map((image, index) => {
+            {state.realFiles.map((image, index) => {
+              let url = URL.createObjectURL(image);
+
+              
               return (
                 <article key={index} className="relative">
                   <button
@@ -136,7 +133,7 @@ const SecondPageAddScheduler = ({ state, dispatch }) => {
                       />
                     </svg>
                   </button>
-                  <img src={image} alt={image} />
+                  <img src={url} alt={url} />
                 </article>
               );
             })}
@@ -193,6 +190,6 @@ const SecondPageAddScheduler = ({ state, dispatch }) => {
       </form>
     </div>
   );
-}
+};
 
 export default SecondPageAddScheduler;

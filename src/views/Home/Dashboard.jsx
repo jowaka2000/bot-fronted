@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {motion} from 'framer-motion';
 import AddApp from "../../components/AddApp";
-import UserApps from "../../components/UserApps";
+import UserMediaBots from "../../components/UserMediaBots";
 
 const Dashboard = () => {
   const [isAddAppForm,setIsAddAppForm]=useState(false);
@@ -16,7 +16,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="relative w-full container mx-auto py-10">
+    <div className="relative w-full container mx-auto pt-10 pb-28">
       
       {
         isAddAppForm && <div className="absolute z-[10] bg-gray-300 opacity-75 w-full h-full"></div>
@@ -27,8 +27,8 @@ const Dashboard = () => {
       }
 
       <div className="z-[1] flex w-full justify-between pb-2 border-b border-gray-300">
-        <span>MY APPS(0)</span>
-        <motion.button onClick={handleOnClickAddAppBtn} whileHover={{scale:1.07}} className=" border px-3 font-semibold  rounded flex items-center border-gray-400 hover:border-green-500">
+        <span className="text-lg font-semibold text-gray-700">MY BOTS </span>
+        <motion.button onClick={handleOnClickAddAppBtn} whileHover={{scale:1.07}} className=" border px-3 font-semibold  rounded flex items-center text-white border-gray-400 hover:border-green-500 bg-green-600 hover:bg-green-700">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,12 +46,12 @@ const Dashboard = () => {
             </svg>
           </span>
 
-          <span>Add App</span>
+          <span>Add Bot</span>
         </motion.button>
       </div>
 
-      
-      <UserApps/>
+   
+      <UserMediaBots setIsAddAppForm={setIsAddAppForm} />
     </div>
   );
 };

@@ -1,8 +1,7 @@
-import React,{useRef} from 'react'
-
+import React, { useRef } from "react";
 
 const FirstPageAddScheduler = ({ state, dispatch }) => {
-    const contentRef = useRef();
+  const contentRef = useRef();
 
   const handleClickAddContentButton = () => {
     const content = contentRef.current.value;
@@ -24,7 +23,7 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
   };
 
   const handleUrlOnChange = (e) => {
-    dispatch({type:'ADD_URL',payLoad:e.target.value});
+    dispatch({ type: "ADD_URL", payLoad: e.target.value });
   };
 
   //handle submit
@@ -41,7 +40,7 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
     } else {
       if (state.messageContent[state.messageContent.length - 1] !== content) {
         if (content !== "") {
-          dispatch({ type: "ADD_MESSAGE_CONTENT", payLoad: content  });
+          dispatch({ type: "ADD_MESSAGE_CONTENT", payLoad: content });
         }
 
         contentRef.current.value = "";
@@ -51,7 +50,6 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
     }
   };
 
-
   return (
     <div>
       <form>
@@ -60,19 +58,15 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
             <label className="text-sm text-gray-700 font-semibold">
               Content(optional)
             </label>
-            <button
-              onClick={handleClickAddContentButton}
-              type="button"
-              className="px-1"
-            >
-              +
-            </button>
           </div>
           {state.messageContent && (
             <div className="text-xs w-full pb-1">
               {state.messageContent.map((content, index) => {
                 return (
-                  <article key={index} className="flex gap-1 items-center border-b">
+                  <article
+                    key={index}
+                    className="flex gap-1 items-center border-b"
+                  >
                     <button
                       type="button"
                       onClick={() => handleRemoveContent(index)}
@@ -105,6 +99,31 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
             rows={3}
             placeholder="Type message here.."
           ></textarea>
+          <div className="flex justify-end">
+            
+            <button
+              onClick={handleClickAddContentButton}
+              type="button"
+              className="px-1 text-green-700 hover:text-green-900 flex items-center gap-1"
+              title="Add another message"
+            >
+              <span className="text-xs pb-[4px]">Click here to add another message</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div>
@@ -148,6 +167,6 @@ const FirstPageAddScheduler = ({ state, dispatch }) => {
       </form>
     </div>
   );
-}
+};
 
 export default FirstPageAddScheduler;
