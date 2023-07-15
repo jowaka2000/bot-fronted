@@ -8,7 +8,7 @@ import bot from "../assets/system/bot.png";
 
 const DashboardNavbar = () => {
   const [isProfile, setIsProfile] = useState(false);
-  const { user, setToken, setUser } = useStateContext();
+  const { user, setToken, setUser,setIsAdmin } = useStateContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleOnClickLogout = (e) => {
@@ -22,6 +22,7 @@ const DashboardNavbar = () => {
         setUser(null);
         localStorage.removeItem("ACCESS_TOKEN");
         setIsLoading(false);
+        setIsAdmin(false);
       })
       .catch((error) => {
         console.log(error);
