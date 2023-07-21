@@ -11,6 +11,9 @@ import NotFound from "./views/error/NotFound";
 import ShowApp from "./views/show/ShowApp";
 import Index from "./views/documentation/Index";
 import { ShowAppContext } from "./contexts/ShowAppContext";
+import About from "./views/others/About";
+import PrivacyPolicy from "./views/others/PrivacyPolicy";
+import { DashboardContext } from "./contexts/DashboardContext";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/docs",
+        element: <Index />,
+      },
+      {
+        path: "/privacy-policy",
+        element: <PrivacyPolicy />,
       },
     ],
   },
@@ -31,7 +46,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+          <DashboardContext>
+            <Dashboard />
+          </DashboardContext>
+        ),
       },
       {
         path: "/dashboard/apps/:bot_type/:id",
@@ -40,10 +59,6 @@ const router = createBrowserRouter([
             <ShowApp />
           </ShowAppContext>
         ),
-      },
-      {
-        path: "/dashboard/docs",
-        element: <Index />,
       },
     ],
   },

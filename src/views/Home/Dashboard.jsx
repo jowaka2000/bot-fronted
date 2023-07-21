@@ -1,20 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import {motion} from 'framer-motion';
 import AddApp from "../../components/AddApp";
 import UserMediaBots from "../../components/UserMediaBots";
+import { useDashboardContext } from "../../contexts/DashboardContext";
 
 const Dashboard = () => {
-  const [isAddAppForm,setIsAddAppForm]=useState(false);
 
+  const {setIsAddAppForm,isAddAppForm}=useDashboardContext();
 
-  const handleOnClickAddAppBtn = ()=>{
-    setIsAddAppForm(true);
-  }
-
-  const handleOnClickHideAddAppForm = ()=>{
-    setIsAddAppForm(false);
-  }
-
+ 
   return (
     <div className="relative w-full container mx-auto pt-10 pb-28">
       
@@ -23,12 +17,12 @@ const Dashboard = () => {
       }
       
       {
-        isAddAppForm && <AddApp handleOnClickHideAddAppForm={handleOnClickHideAddAppForm} />
+        isAddAppForm && <AddApp />
       }
 
-      <div className="z-[1] flex w-full justify-between pb-2 border-b border-gray-300">
+      <div className="z-[1] flex w-full justify-between px-2 md:px-0 pb-2 border-b border-gray-300">
         <span className="text-lg font-semibold text-gray-700">MY BOTS </span>
-        <motion.button onClick={handleOnClickAddAppBtn} whileHover={{scale:1.07}} className=" border px-3 font-semibold  rounded flex items-center text-white border-gray-400 hover:border-green-500 bg-green-600 hover:bg-green-700">
+        <motion.button onClick={()=>setIsAddAppForm(true)} whileHover={{scale:1.07}} className=" border px-3 font-semibold  rounded flex items-center text-white border-gray-400 hover:border-green-500 bg-green-600 hover:bg-green-700">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +45,7 @@ const Dashboard = () => {
       </div>
 
    
-      <UserMediaBots setIsAddAppForm={setIsAddAppForm} />
+      <UserMediaBots />
     </div>
   );
 };

@@ -8,8 +8,9 @@ import bot from "../assets/system/bot.png";
 
 const DashboardNavbar = () => {
   const [isProfile, setIsProfile] = useState(false);
-  const { user, setToken, setUser,setIsAdmin } = useStateContext();
+  const { user, setToken, setUser, setIsAdmin } = useStateContext();
   const [isLoading, setIsLoading] = useState(false);
+  
 
   const handleOnClickLogout = (e) => {
     e.preventDefault();
@@ -35,23 +36,24 @@ const DashboardNavbar = () => {
       <section className="relative container flex mx-auto items-center justify-between md:px-0 px-3">
         <Link to="/dashboard" className="flex items-center">
           <img src={bot} alt="bot" className="w-9 h-7" />
-          <span  className="text-lg text-gray-700 font-semibold">
+          <span className="text-lg text-gray-700 font-semibold">
             My Bot Dashboard
           </span>
         </Link>
 
         <article className="hidden md:flex gap-4 items-center ">
           <div className="flex gap-4">
-            <Link to="/about-us" className="hover:underline">
+            <Link to="/about" className="hover:underline">
               About-us
             </Link>
-            <Link to="/contact-us" className="hover:underline">
+            <Link to="/contact" className="hover:underline">
               Contact-us
             </Link>
-            <Link to="docs" className="hover:underline">
+            <Link to="/docs" className="hover:underline">
               Docs
             </Link>
           </div>
+
           <button
             className="flex px-3 border rounded hover:border-gray-400 py-1 items-center gap-2"
             onClick={() => setIsProfile(!isProfile)}
@@ -139,7 +141,7 @@ const DashboardNavbar = () => {
             </div>
 
             <div className="md:hidden flex">
-              <Link to="/about-us" className="hover:underline">
+              <Link to="/about" className="hover:underline">
                 About-us
               </Link>
             </div>

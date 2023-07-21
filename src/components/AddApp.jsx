@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import AddAppFirstPage from "./add-app/AddAppFirstPage";
 import AddAppSecondPage from "./add-app/AddAppSecondPage";
+import { useDashboardContext } from "../contexts/DashboardContext";
 
 const reducer = (state, action) => {
   if (action.type === "CHANGE_BOT_TYPE") {
@@ -111,8 +112,9 @@ const defaultAddAppValues = {
   botTitle: "",
 };
 
-const AddApp = ({ handleOnClickHideAddAppForm }) => {
+const AddApp = () => {
   const [state, dispatch] = useReducer(reducer, defaultAddAppValues);
+  const {setIsAddAppForm,loadApps}=useDashboardContext();
 
   useEffect(() => {
     const intervals = setInterval(() => {
@@ -144,7 +146,7 @@ const AddApp = ({ handleOnClickHideAddAppForm }) => {
         )}
         <div className="flex justify-end">
           <button
-            onClick={handleOnClickHideAddAppForm}
+            onClick={()=>{setIsAddAppForm(false);loadApps()}}
             className="hover:text-red-800 border px-1 rounded hover:border-red-400"
           >
             <svg

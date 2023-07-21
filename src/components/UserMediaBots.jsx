@@ -1,28 +1,15 @@
-import React, { useEffect, useState } from "react";
 import loading from "../assets/loading.gif";
-import axiosClient from "../axiosClient";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import bot from "../assets/system/bot.png";
 import fb from "../assets/media/fb.png";
 import telegramIcon from "../assets/media/telegram.png";
+import { useDashboardContext } from "../contexts/DashboardContext";
 
-const UserMediaBots = ({ setIsAddAppForm }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [apps, setApps] = useState([]);
+const UserMediaBots = () => {
 
-  useEffect(() => {
-    axiosClient
-      .get("/user-apps/index")
-      .then(({ data }) => {
-        setApps(data.apps);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setIsLoading(false);
-      });
-  }, []);
+  const {isLoading,apps,setIsAddAppForm}=useDashboardContext();
+
 
   return (
     <div className="pt-6">
@@ -76,7 +63,7 @@ const UserMediaBots = ({ setIsAddAppForm }) => {
           {apps.length > 0 && (
             <div className="dashboardShadow p-3  rounded-t-xl space-y-4">
               <section className="border-b border-slate-400 flex">
-                Facebook,Telegram, and Twitter Apps
+                Facebook,Telegram, and Twitter Bots
               </section>
 
               <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -87,7 +74,8 @@ const UserMediaBots = ({ setIsAddAppForm }) => {
                     bot_name,
                     page_id,
                     active,
-                    access_token,
+                    activated,
+                    approved
                   } = app;
 
                   return (
@@ -119,7 +107,7 @@ const UserMediaBots = ({ setIsAddAppForm }) => {
                             />
                           )}
 
-                          {access_token && (
+                          {(activated && approved) && (
                             <span className="text-green-600">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

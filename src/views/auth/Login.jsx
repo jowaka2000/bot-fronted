@@ -194,11 +194,11 @@ const Login = () => {
           </Link>
         </div>
 
-        <div className="flex justify-end text-xs md:text-sm px-1">
+        {/* <div className="flex justify-end text-xs md:text-sm px-1">
           <Link to="/reset-password" className="hover:text-gray-800">
             <span className="underline">Click here </span> to reset password
           </Link>
-        </div>
+        </div> */}
       </form>
     </div>
   );

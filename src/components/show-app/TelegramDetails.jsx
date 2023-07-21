@@ -61,19 +61,23 @@ const TelegramDetails = () => {
       <div className="w-full md:basis-1/2 space-y-2">
         <div className="flex text-sm text-gray-700 md:justify-start justify-between">
           <div className="md:basis-2/3 space-y-1">
+          
             {app.bot_type === "telegram-channel" && (
               <article>{`Channel Name: ${
                 isLoading ? "....." : app.media_name
               }`}</article>
             )}
+
             {app.bot_type === "telegram-group" && (
               <article>{`Group Name: ${
                 isLoading ? "....." : app.media_name
               }`}</article>
             )}
+
             <article>{`Bot Nickname: ${
               isLoading ? "....." : app.bot_nickname
             }`}</article>
+
             <article>{`Bot Type: ${
               isLoading ? "....." : app.bot_type
             }`}</article>
@@ -83,7 +87,7 @@ const TelegramDetails = () => {
             <article>Status</article>
             {!isLoading && (
               <>
-                {app.active === 1 ? (
+                {app.active ? (
                   <article className="text-xs">
                     <div className="flex items-center">
                       <span className="text-green-600">
