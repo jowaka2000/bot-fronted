@@ -37,6 +37,7 @@ const HomeLayout = () => {
     <div>
       <DashboardNavbar />
       <Outlet />
+      
     </div>
   );
 };

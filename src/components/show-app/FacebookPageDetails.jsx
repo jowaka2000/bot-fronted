@@ -65,7 +65,7 @@ const FacebookPageDetails = () => {
             <article>Status</article>
             {!isLoading && (
               <>
-                {app.active === 1 ? (
+                {app.active ? (
                   <article className="text-xs">
                     <div className="flex items-center">
                       <span className="text-green-600">

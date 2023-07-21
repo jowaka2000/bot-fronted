@@ -4,7 +4,6 @@ import SecondPageAddScheduler from "./SecondPageAddScheduler";
 import ThirdPageAddScheduler from "./ThirdPageAddScheduler";
 import { useParams } from "react-router-dom";
 
-
 const reducer = (state, action) => {
   if (action.type === "ADD_MESSAGE_CONTENT") {
     const newMessageContent = [...state.messageContent, action.payLoad];
@@ -136,7 +135,7 @@ const defaultAddPostState = {
   isSuccessMessage: false,
 };
 
-const AddPostScheduler = ({ setIsAddPost }) => {
+const AddPostScheduler = ({ setIsAddPost, isAddPost }) => {
   const data = useParams();
 
   const [state, dispatch] = useReducer(reducer, defaultAddPostState);
@@ -160,65 +159,76 @@ const AddPostScheduler = ({ setIsAddPost }) => {
   const handleCancelAddSchedulerButton = () => {
     // loadPosts(id);
     setIsAddPost(false);
+   
   };
 
   return (
-    <div className="relative w-full md:w-6/12 shadow bg-white px-5">
-      {state.isError && (
-        <div className="absolute w-[90%] bg-red-500 text-center text-white text-sm py-1">
-          {state.errorMessage}
-        </div>
+    <>
+      {isAddPost && (
+        <section className="absolute right-0 left-0 z-[28]  flex justify-center top-8">
+          <div className="relative w-full md:w-6/12 shadow bg-white px-5">
+            {state.isError && (
+              <div className="absolute w-[90%] bg-red-500 text-center text-white text-sm py-1">
+                {state.errorMessage}
+              </div>
+            )}
+
+            {state.isSuccessMessage && (
+              <div className="absolute w-[90%] bg-green-500 text-center text-white text-sm py-1">
+                A scheduler has been Successfully Created!
+              </div>
+            )}
+
+            <article className="w-full flex justify-end">
+              <button
+                onClick={handleCancelAddSchedulerButton}
+                className="pt-3 hover:text-red-500 text-gray-800"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </article>
+
+            <article className="w-full flex justify-center text-lg font-semibold text-gray-700">
+              ADD SCHEDULER
+            </article>
+
+            {/* first page */}
+            {state.isFirstPage && (
+              <FirstPageAddScheduler state={state} dispatch={dispatch} />
+            )}
+
+            {/* second page */}
+
+            {state.isSecondPage && (
+              <SecondPageAddScheduler state={state} dispatch={dispatch} />
+            )}
+
+            {/* Third page */}
+
+            {state.isThirdPage && (
+              <ThirdPageAddScheduler
+                state={state}
+                dispatch={dispatch}
+                id={id}
+              />
+            )}
+          </div>
+        </section>
       )}
-
-      {state.isSuccessMessage && (
-        <div className="absolute w-[90%] bg-green-500 text-center text-white text-sm py-1">
-          A scheduler has been Successfully Created!
-        </div>
-      )}
-
-      <article className="w-full flex justify-end">
-        <button
-          onClick={handleCancelAddSchedulerButton}
-          className="pt-3 hover:text-red-500 text-gray-800"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </article>
-
-      <article className="w-full flex justify-center text-lg font-semibold text-gray-700">
-        ADD SCHEDULER
-      </article>
-
-      {/* first page */}
-      {state.isFirstPage && (
-        <FirstPageAddScheduler state={state} dispatch={dispatch} />
-      )}
-
-      {/* second page */}
-
-      {state.isSecondPage && (
-        <SecondPageAddScheduler state={state} dispatch={dispatch} />
-      )}
-
-      {/* Third page */}
-
-      {state.isThirdPage && (
-        <ThirdPageAddScheduler state={state} dispatch={dispatch} id={id} />
-      )}
-    </div>
+    </>
   );
 };
 

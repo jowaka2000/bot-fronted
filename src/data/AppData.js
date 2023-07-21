@@ -21,6 +21,7 @@ const AppData = {
         "Once the scheduler reaches the end of the list, it starts again from the beginning, re-posting or re-sending the first message and image. This way, you can ensure that your social media accounts are regularly updated with fresh content without you having to manually intervene. You can also add Links to the scheduler. "
     }
   ],
+  baseImageUrl:'https://api.alphabailwake.com/images',
 };
 
 export default AppData;

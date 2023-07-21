@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axiosClient from "../axiosClient";
 import loading from "../assets/loading.gif";
+import { useShowAppContext } from "../contexts/ShowAppContext";
 
 const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
   const [isPublishPost, setIsPublishPost] = useState(state.publishPost);
   const [isLoading, setIsLoading] = useState(false);
-
+  const { isAppApproved } = useShowAppContext();
 
   const handleSelectSchedulerOnChange = (e) => {
     dispatch({ type: "ADD_SCHEDULER", payLoad: e.target.value });
@@ -27,7 +28,6 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
 
   //submit scheduler
 
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -38,8 +38,6 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
       formData.append(`images[${index}]`, image);
     });
 
-
-
     const payLoad = {
       appId: id,
       messageContent: state.messageContent,
@@ -49,8 +47,8 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
       publishPost: state.publishPost,
     };
 
-
-
+    console.log(payLoad);
+    
     formData.append("payLoad", JSON.stringify(payLoad));
 
     axiosClient
@@ -61,7 +59,7 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
       })
       .catch((error) => {
         setIsLoading(false);
-        console.log(error);
+        // console.log(error);
       });
   };
 
@@ -82,7 +80,9 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
             className="flex w-full text-sm outline-none py-3 px-1 border border-slate-300 rounded hover:border-slate-400"
           >
             <option value="none">None</option>
-            <option value="once">Post Once(now)</option>
+            <option disabled={!isAppApproved} value="once">
+              Post Once(now)
+            </option>
             <option value="every_one_hour">Post Every Hour</option>
             <option value="every_two_hours">Post Every Two Hours</option>
             <option value="every_three_hours">Post Every Three Hours</option>
@@ -140,23 +140,25 @@ const ThirdPageAddScheduler = ({ state, dispatch, id }) => {
           </div>
         )}
 
-        <div className="flex items-center gap-1 py-1">
-          <input
-            type="checkbox"
-            name="publish"
-            id="publish"
-            className=""
-            checked={isPublishPost || state.schedule === "none"}
-            onChange={handlePublishPostOnChange}
-          />
-          <label
-            className="text-sm text-gray-700 font-semibold"
-            htmlFor="publish"
-          >
-            Publish Post Now{" "}
-            {state.schedule !== "none" && `and ${state.schedule} afterwards`}
-          </label>
-        </div>
+        {isAppApproved && (
+          <div className="flex items-center gap-1 py-1">
+            <input
+              type="checkbox"
+              name="publish"
+              id="publish"
+              className=""
+              checked={((isPublishPost || state.schedule === "none") && isAppApproved)}
+              onChange={handlePublishPostOnChange}
+            />
+            <label
+              className="text-sm text-gray-700 font-semibold"
+              htmlFor="publish"
+            >
+              Publish Post Now{" "}
+              {state.schedule !== "none" && `and ${state.schedule} afterwards`}
+            </label>
+          </div>
+        )}
 
         <div className="flex items-center justify-between pt-4 pb-2">
           <button

@@ -6,6 +6,7 @@ import Schedule from "./Schedule";
 import { Link, useParams } from "react-router-dom";
 import { useShowAppContext } from "../contexts/ShowAppContext";
 import AppData from '../data/AppData';
+import EditScheduler from "./EditScheduler";
 
 const reducer = (state, action) => {
   if (action.type === "SHOW_DELETE_BUTTON") {
@@ -32,7 +33,12 @@ const reducer = (state, action) => {
   if (action.type === "SET_IS_DELETE_LOADING") {
     return { ...state, isDeleteLoading: action.payLoad };
   }
-
+  if(action.type==='SHOW_EDIT_SCHEDULER'){
+    return {...state,isEditScheduler:true,editSchedulerPost:action.payLoad};
+  }
+  if(action.type==='HIDE_EDIT_SCHEDULER'){
+    return {...state,isEditScheduler:false,editSchedulerPost:null};
+  }
   throw new Error("404 Not found");
 };
 
@@ -42,6 +48,8 @@ const defaultScheduleValues = {
   itemToDeleteId: 0,
   isDeleteLoading: false,
   isSuccessMessage: false,
+  isEditScheduler:false,
+  editSchedulerPost:0,
 };
 
 const Schedulers = ({setIsAddPost}) => {
@@ -72,6 +80,7 @@ const Schedulers = ({setIsAddPost}) => {
         dispatch({ type: "SET_IS_SUCCESS_MESSAGE", payLoad: true });
       })
       .catch((error) => {
+        console.log(error);
         dispatch({ type: "SET_IS_DELETE_LOADING", payLoad: false });
       });
   };
@@ -87,6 +96,10 @@ const Schedulers = ({setIsAddPost}) => {
     return () => clearInterval(intervals);
   });
 
+  const updatePosts = ()=>{
+    loadPosts(appId);
+  }
+
   return (
     <div className="relative">
       {state.isSuccessMessage && (
@@ -96,8 +109,8 @@ const Schedulers = ({setIsAddPost}) => {
           </div>
         </div>
       )}
-      {state.isDeleteSchedulerForm && (
-        <div className="fixed bg-gray-300 w-full h-full top-20 z-[20] opacity-50"></div>
+      {(state.isDeleteSchedulerForm || state.isEditScheduler) && (
+        <div className="fixed bg-gray-300 w-full h-full top-0 z-[20] opacity-50"></div>
       )}
 
       {state.isDeleteSchedulerForm && (
@@ -202,6 +215,11 @@ const Schedulers = ({setIsAddPost}) => {
           </div>
         </div>
       )}
+
+     {
+      state.isEditScheduler &&  <EditScheduler post={state.editSchedulerPost} dispatch={dispatch} updatePosts={updatePosts} />
+     }
+
       {posts.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 space-y-4 md:space-y-0 md:gap-4 px-2 md:px-0">
           {posts.map((post) => {

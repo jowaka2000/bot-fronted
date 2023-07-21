@@ -101,7 +101,7 @@ const AddAppSecondPage = ({ state, dispatch }) => {
   return (
     <form className="px-4 space-y-3" onSubmit={handleAppDataSubmit}>
       <article>
-        <label>Bot Name </label>
+        <label>Preferred Bot Name </label>
         <input
           type="text"
           placeholder="Give your Bot a Name"
@@ -200,7 +200,7 @@ const AddAppSecondPage = ({ state, dispatch }) => {
         state.botType === "telegram-group" ||
         state.botType === "telegram-user") && (
         <article>
-          <label>Bot Nickname</label>
+          <label>Preferred Bot Nickname</label>
           <input
             type="text"
             value={state.botNickname}
