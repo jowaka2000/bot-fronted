@@ -210,12 +210,12 @@ const Home = () => {
       <div className="mt-36">
         <div className="relative w-full">
           <div className="w-full absolute p-4 space-y-10">
-            <div className="w-full md:w-6/12 pt-2 md:pt-20 text-3xl md:text-4xl font-bold text-white">
+            <div className="w-full md:w-6/12 pt-1 md:pt-2 md:pt-20 text-base md:text-4xl font-bold text-white">
               Experience the Future of Messaging with Our Innovative Bot.
               Unleash the Power of Automation, Enriching Your Conversations with
               Dynamic Interactions
             </div>
-            <div className="hidden md:flex w-full md:w-6/12 text-gray-100">
+            <div className="hidden md:flex md:text-sm text-xs w-full md:w-6/12 text-gray-100">
               Say goodbye to static messages and embrace the future of
               messaging. Our bot is designed to bring your conversations to
               life, transforming animated drawings into engaging interactions

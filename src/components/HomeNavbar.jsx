@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import bot from "../assets/system/bot.png";
+import { useStateContext } from "../contexts/ContextProvider";
 
 const HomeNavbar = () => {
   const [isMenu, setIsMenu] = useState();
+  const { token } = useStateContext();
 
   return (
     <div className="fixed homeShadow w-full bg-white py-4 md:py-7 z-[100]">
@@ -23,13 +25,17 @@ const HomeNavbar = () => {
 
         <article className="hidden md:flex items-center gap-4">
           <div>
-            <Link to='/about' className="hover:underline">About Us</Link>
+            <Link to="/about" className="hover:underline">
+              About Us
+            </Link>
           </div>
           <div>
             <Link className="hover:underline">Contact Us</Link>
           </div>
           <div>
-            <Link to='/privacy-policy' className="hover:underline">Privacy Policy</Link>
+            <Link to="/privacy-policy" className="hover:underline">
+              Privacy Policy
+            </Link>
           </div>
         </article>
 
@@ -46,19 +52,21 @@ const HomeNavbar = () => {
             </Link>
           </div>
 
-          <div>
-            <Link to="/login" className="">
-              <motion.button
-                whileHover={{ scale: 1.07 }}
-                className="border border-green-600  rounded-lg px-2 md:px-3 py-1 shadow hover:bg-green-700 text-gray-800 font-bold hover:text-white"
-              >
-                Sign In
-              </motion.button>
-            </Link>
-          </div>
+          {!token && (
+            <div>
+              <Link to="/login" className="">
+                <motion.button
+                  whileHover={{ scale: 1.07 }}
+                  className="border border-green-600  rounded-lg px-2 md:px-3 py-1 shadow hover:bg-green-700 text-gray-800 font-bold hover:text-white"
+                >
+                  Sign In
+                </motion.button>
+              </Link>
+            </div>
+          )}
 
           <div className="pt-2 block md:hidden">
-            <button className="" onClick={()=>setIsMenu(!isMenu)}>
+            <button className="" onClick={() => setIsMenu(!isMenu)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -80,32 +88,57 @@ const HomeNavbar = () => {
         {isMenu && (
           <div className="absolute block md:hidden homeShadow right-0 top-12 bg-white w-6/12 md:w-2/12 rounded-l px-3 space-y-2 p-2 rounded-b">
             <div>
-              <Link to="/docs" className="hover:underline" onClick={()=>setIsMenu(false)}>
+              <Link
+                to="/docs"
+                className="hover:underline"
+                onClick={() => setIsMenu(false)}
+              >
                 Docs
               </Link>
             </div>
             <div>
-              <Link to='/about' className="hover:underline" onClick={()=>setIsMenu(false)}>About Us</Link>
+              <Link
+                to="/about"
+                className="hover:underline"
+                onClick={() => setIsMenu(false)}
+              >
+                About Us
+              </Link>
             </div>
 
             <div>
-              <Link className="hover:underline" onClick={()=>setIsMenu(false)}>Contact Us</Link>
+              <Link
+                className="hover:underline"
+                onClick={() => setIsMenu(false)}
+              >
+                Contact Us
+              </Link>
             </div>
 
             <div>
-              <Link to="/login" className="hover:underline" onClick={()=>setIsMenu(false)}>
+              <Link
+                to="/login"
+                className="hover:underline"
+                onClick={() => setIsMenu(false)}
+              >
                 Login
               </Link>
             </div>
 
             <div>
-              <Link to="/register" className="hover:underline" onClick={()=>setIsMenu(false)}>
+              <Link
+                to="/register"
+                className="hover:underline"
+                onClick={() => setIsMenu(false)}
+              >
                 Register
               </Link>
             </div>
 
             <div>
-              <Link to='/privacy-policy' className="hover:underline">Privacy Policy</Link>
+              <Link to="/privacy-policy" className="hover:underline">
+                Privacy Policy
+              </Link>
             </div>
           </div>
         )}

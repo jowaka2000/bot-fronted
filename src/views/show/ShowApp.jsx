@@ -134,7 +134,7 @@ const ShowApp = () => {
   const updatePosts = () => {};
 
   return (
-    <div className="relative container mx-auto md:px-0 px-2 pt-4 pb-28">
+    <div className="relative h-full container mx-auto md:px-0 px-2 pt-4 pb-28">
       {/* Error */}
       {isAlertError && (
         <div className="absolute flex justify-center w-[97%] ">
@@ -304,7 +304,7 @@ const ShowApp = () => {
         <Schedulers setIsAddPost={setIsAddPost} />
       )}
 
-      {!isLoading && <ShowAppFooter />}
+      {/* {!isLoading && <ShowAppFooter />} */}
     </div>
   );
 };

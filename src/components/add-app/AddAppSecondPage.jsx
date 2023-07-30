@@ -154,7 +154,7 @@ const AddAppSecondPage = ({ state, dispatch }) => {
           <label className="flex justify-between items-center">
             <span>Page ID</span>
             <a
-              href="/media-bot/dashboard/docs/#facebook-page-id"
+              href="/docs"
               className="text-xs text-green-600 hover:underline"
             >
               Get Page ID
@@ -178,7 +178,7 @@ const AddAppSecondPage = ({ state, dispatch }) => {
           <label className="flex justify-between items-center">
             <span>User ID</span>
             <a
-              href="/media-bot/dashboard/docs/#facebook-user-id"
+              href="/docs"
               className="text-xs text-green-600 hover:underline"
             >
               Get User ID

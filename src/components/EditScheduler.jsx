@@ -252,9 +252,9 @@ const EditScheduler = ({ dispatch, post, updatePosts }) => {
     <motion.div
       initial={{ y: 70 }}
       whileInView={{ y: -260 }}
-      className="fixed w-full justify-center flex z-[21] h-[84%] md:h-[93%]"
+      className="fixed w-full justify-center flex z-[21] h-[84%] md:h-[93%] px-2 md:px-0"
     >
-      <section className="relative homeShadow w-full md:w-6/12 bg-white h-full overflow-y-scroll pb-10">
+      <section className="relative pt-4 homeShadow w-full md:w-6/12 bg-white h-full overflow-y-scroll pb-10">
         {editState.isError && (
           <div className="fixed w-[94%] md:w-[50%] flex justify-center">
             <div className="bg-red-500 basis-3/4 text-white text-center ">
@@ -271,7 +271,7 @@ const EditScheduler = ({ dispatch, post, updatePosts }) => {
           </div>
         )}
 
-        <div className="absolute flex justify-end p-1  w-full">
+        <div className="absolute flex justify-end p-1 px-3 pb-4  w-full">
           <button
             onClick={() => {
               dispatch({ type: "HIDE_EDIT_SCHEDULER" });
@@ -285,7 +285,7 @@ const EditScheduler = ({ dispatch, post, updatePosts }) => {
               viewBox="0 0 24 24"
               strokeWidth="2"
               stroke="currentColor"
-              className="w-6 h-6"
+              className="w-7 h-7"
             >
               <path
                 strokeLinecap="round"

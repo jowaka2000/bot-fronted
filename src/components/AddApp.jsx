@@ -94,7 +94,7 @@ const reducer = (state, action) => {
 };
 
 const defaultAddAppValues = {
-  botType: "facebook-page",
+  botType: "telegram-channel",
   botName: "",
   mediaName: "",
   pageID: "",
