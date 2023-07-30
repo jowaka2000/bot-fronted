@@ -13,11 +13,11 @@ const AddAppFirstPage = ({ state, dispatch }) => {
           className="w-full outline-none p-2 border border-gray-300 hover:border-gray-400 rounded text-sm"
         >
           <option value="facebook-page">Facebook Page Bot</option>
-          <option disabled value="facebook-group">
-            Facebook Group Bot
-          </option>
           <option value="telegram-channel">
             Telegram Channel Bot
+          </option>
+          <option disabled value="facebook-group">
+            Facebook Group Bot
           </option>
           <option value="telegram-group">
             Telegram Group Bot

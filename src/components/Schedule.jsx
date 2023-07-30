@@ -23,18 +23,31 @@ const Schedule = ({ dispatch, post }) => {
         } border-gray-300 w-full`}
       >
         <div className="font-semibold">
-          Message Content ({messageContent.length})
+          Message Content ({messageContent ? messageContent.length : "0"})
         </div>
-        {messageContent.length > 0 ? (
-          <div className="text-sm flex overflow-x-hidden w-full">
-            {messageContent[0].length > 180
-              ? messageContent[1].slice(0, 180) + "..."
-              : messageContent[0]}
-          </div>
+
+        {messageContent && messageContent.length > 0 ? (
+          <>
+            <div className="text-sm flex overflow-x-hidden w-full">
+              {messageContent[0].length > 180
+                ? messageContent[0].slice(0, 180) + "..."
+                : messageContent[0]}
+            </div>
+
+            <button
+            className="text-green-700 hover:underline text-sm"
+              onClick={() =>
+                dispatch({ type: "SHOW_EDIT_SCHEDULER", payLoad: post })
+              }
+            >
+              View More...
+            </button>
+          </>
         ) : (
           <div className="flex w-full justify-center">Not Messages</div>
         )}
-        {messageContent.length > 1 && (
+
+        {messageContent && messageContent.length > 1 && (
           <div className="py-2">
             <div className="text-sm overflow-x-hidden">
               {messageContent[1].length > 180

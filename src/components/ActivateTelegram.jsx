@@ -169,7 +169,7 @@ const ActivateTelegram = ({ dispatch }) => {
             <div className="flex justify-center text-center">Loading</div>
           )}
 
-          {!isDataLoading && updates.length === 0 && (
+          {!isDataLoading && (updates && updates.length) === 0 && (
             <div className="pt-8 space-y-3">
               <div className="flex text-center text-sm px-8 text-yellow-900">
                 Make sure the channel/group has least 1 message. Also make sure
@@ -313,7 +313,7 @@ const ActivateTelegram = ({ dispatch }) => {
             <motion.button
               whileHover={{ scale: 1.07 }}
               type="submit"
-              disabled={updates.length === 0 || isDataLoading}
+              disabled={(updates && (updates.length === 0)) || isDataLoading}
               className="disabled:cursor-not-allowed disabled:bg-opacity-75 px-4 bg-green-600 hover:bg-green-700 flex justify-center text-white font-semibold rounded py-1 basis-1/2"
             >
               <span>ACTIVATE</span>

@@ -10,11 +10,12 @@ const Footer = () => {
     <div className="w-full bg-slate-100">
       <div className="container mx-auto">
         <section className="flex flex-col md:flex-row justify-center">
+          
           <article className="w-full md:w-4/12  flex justify-center py-16">
             <div className="space-y-4">
               <Link
                 to="/"
-                className="text-xl md:text-2xl font-semibold flex items-center pb-4"
+                className="text-xl md:text-2xl font-semibold flex justify-center items-center pb-4"
               >
                 <span>
                   <img src={bot} alt="bot" className="w-8 md:w-9" />
@@ -22,16 +23,24 @@ const Footer = () => {
                 <span>Post Master</span>
               </Link>
 
-              <div className="px-2 text-gray-700">
+              <div className="px-2 text-gray-700 flex justify-center">
                 <small>Follow Us on</small>
               </div>
 
-              <div className="flex px-2 items-center gap-3">
-                <a href="https://web.facebook.com/profile.php?id=100094690910849" rel='noreferrer' target="_blank">
+              <div className="flex px-2 items-center gap-3 justify-center">
+                <a
+                  href="https://web.facebook.com/profile.php?id=100094690910849"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <img src={fb} alt="facebook" className="w-7 h-7" />
                 </a>
 
-                <a href='https://t.me/mediapostmaster' target="_blank" rel='noreferrer'> 
+                <a
+                  href="https://t.me/mediapostmaster"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <img src={telegram} alt="telegram" className="w-7 h-7" />
                 </a>
 
@@ -44,20 +53,19 @@ const Footer = () => {
 
           <article className="py-7 w-full md:w-3/12 flex justify-center">
             <div className="space-y-1">
-              <h1 className="text-xl font-semibold text-gray-800">SERVICES</h1>
-              <div className="text-gray-700">Facebook Page Bot</div>
-              <div className="text-gray-700">Facebook Group Bot</div>
-              <div className="text-gray-700">Telegram Channel Bot</div>
-              <div className="text-gray-700">Telegram Group Bot</div>
-              <div className="text-gray-700">Twitter Bot</div>
+              <h1 className="text-xl font-semibold text-gray-800 flex justify-center">SERVICES</h1>
+              <div className="text-gray-700  flex justify-center">Facebook Page Bot</div>
+              <div className="text-gray-700  flex justify-center">Facebook Group Bot</div>
+              <div className="text-gray-700  flex justify-center">Telegram Channel Bot</div>
+              <div className="text-gray-700  flex justify-center">Telegram Group Bot</div>
+              <div className="text-gray-700  flex justify-center">Twitter Bot</div>
             </div>
           </article>
+
           <article className="py-7 w-full md:w-3/12 flex justify-center">
             <div className="space-y-4">
-              <h1 className="text-xl font-semibold text-gray-800">
-                CONTACTS
-              </h1>
-              <div className="text-gray-700 flex items-center gap-1">
+              <h1 className="text-xl font-semibold text-gray-800 flex justify-center">CONTACTS</h1>
+              <div className="text-gray-700 flex items-center gap-1 justify-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +84,7 @@ const Footer = () => {
                 </span>
                 <span>+24791742766</span>
               </div>
-              <div className="text-gray-700 flex items-center gap-1">
+              <div className="text-gray-700 flex items-center  justify-center gap-1">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +103,7 @@ const Footer = () => {
                 </span>
                 <span>+24791742766</span>
               </div>
-              <div className="text-gray-700 flex items-center gap-1">
+              <div className="text-gray-700 flex items-center gap-1  justify-center">
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +112,9 @@ const Footer = () => {
                     strokeWidth="1.5"
                     stroke="currentColor"
                     className="w-5 h-5"
-                  > flex items-center
+                  >
+                    {" "}
+                    flex items-center
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -116,6 +126,7 @@ const Footer = () => {
               </div>
             </div>
           </article>
+
         </section>
       </div>
     </div>
